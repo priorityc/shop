@@ -4,17 +4,83 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="productone.css">
   <title>Document</title>
 </head>
 <body>
+  <header>
+    <h1>Priority cosmetics</h1>
+  </header>
+  <main>
+  <div class='card'>
   <img src='https://images.unsplash.com/photo-1617897903246-719242758050?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8Y29zbWV0aWNzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60' alt='night serum'>
       <h2>Radiance Ageless face serum</h2>
       <p class='price'>17.00£</p>
-      <p>Night elixir for younger looking skin</p>
-      <p><button>Add to Cart</button></p><img src='https://images.unsplash.com/photo-1617897903246-719242758050?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8Y29zbWV0aWNzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60' alt='night serum'>
-      <h2>Radiance Ageless face serum</h2>
-      <p class='price'>17.00£</p>
-      <p>Night elixir for younger looking skin</p>
-      <p><button>Add to Cart</button></p>
+    </div>
+        <div id="smart-button-container">
+          <div style="text-align: center;">
+            <div id="paypal-button-container"></div>
+          </div>
+        </div>
+        <br />
+      <script src="https://www.paypal.com/sdk/js?client-id=AQVkpnAlrdRXSR5Y3KdUMBmwk_Uocy6hBgBaQK8CE39AgMM5HiqEVkxLMRNxg7uhz_U-KE8Ov7t-YTqm&enable-funding=venmo&currency=GBP" data-sdk-integration-source="button-factory"></script>
+      <script>
+        function initPayPalButton() {
+          paypal.Buttons({
+            style: {
+              shape: 'rect',
+              color: 'white',
+              layout: 'vertical',
+              label: 'paypal',
+              
+            },
+    
+            createOrder: function(data, actions) {
+              return actions.order.create({
+                purchase_units: [{"amount":{"currency_code":"GBP","value":1}}]
+              });
+            },
+    
+            onApprove: function(data, actions) {
+              return actions.order.capture().then(function(orderData) {
+                
+                // Full available details
+                console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+    
+                // Show a success message within this page, e.g.
+                const element = document.getElementById('paypal-button-container');
+                element.innerHTML = '';
+                element.innerHTML = '<h3>Thank you for your payment!</h3>';
+    
+                // Or go to another URL:  actions.redirect('thank_you.html');
+                
+              });
+            },
+    
+            onError: function(err) {
+              console.log(err);
+            }
+          }).render('#paypal-button-container');
+        }
+        initPayPalButton();
+      </script>
+      </div>
+      
+      <p>Radiance is powerfull night face serum for mature skin that can bring life to your skin whit its ten plant oils.</p>
+      <ul>
+        <li>softens, nourishes and hydrates</li>
+        <li>erases fine lines</li>
+        <li>100% organic and natural oils</li>
+        <li>evens out the complexion and removes blemishes</li>
+        <li>reduces dark circles under the eyes</li>
+        <li>shrinks pores</li>
+        <li>mystical fragrance</li>
+        <li>absorbs super fast on any skin type</li>
+      </ul>
+      <p>The serum that you need when your skin has a withered look, will smooth out any bumps, shrink pores, improve complexion, and reduce wrinkles.</p>
+      <p>Contains six carrier oils and four essential oils, including the well-known in ancient times Geranium and Frankincense oils. Sea buckthorn oil plays a key role in the composition of the serum with its 170 bioactive ingredients, vitamins and minerals.</p>
+    <p>Unique composition and effectiveness in each drop. In combination with Argan, Apricot and Rosehip oil makes it incredibly suitable for mature skin and of natural necessity for any young skin.</p>
+    <p>Its incredible visible effectiveness after the fourth week of regular use makes it the number one serum in the night face care routine.</p>
+    </main>
 </body>
 </html>
